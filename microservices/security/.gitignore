@@ -34,3 +34,4 @@ build/
 
 ### Temporal removement for public repo ###
 !**/resources/application.properties
+application.properties
