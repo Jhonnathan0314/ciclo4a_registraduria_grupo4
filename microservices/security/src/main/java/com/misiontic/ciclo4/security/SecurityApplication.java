@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.misiontic.ciclo4.security.models.AppUser;
-import com.misiontic.ciclo4.security.repositories.AppUserRepository;
+import com.misiontic.ciclo4.security.services.AppUserServiceImpl;
 
 @SpringBootApplication
 public class SecurityApplication {
@@ -19,18 +19,16 @@ public class SecurityApplication {
   }
 
   @Bean
-  CommandLineRunner runner(AppUserRepository repository) {
+  CommandLineRunner runner(AppUserServiceImpl service) {
     Collection<String> sampleRoles = new ArrayList<>();
     sampleRoles.add("admin");
     sampleRoles.add("user");
     return args -> {
-      repository
-          .save(
-              new AppUser("userOne", "passworsd", "email@email.com", "mysecretpassword",
-                  sampleRoles));
-      repository
-          .save(new AppUser("UserTwo", "passworsd", "emailqemail.com",
-              "secretpassword", sampleRoles));
+      service.addUser(
+          new AppUser("001", "userOne", "email@email.com", "pass",
+              sampleRoles));
+      service.addUser(new AppUser("002", "userTwo", "emailqemail.com",
+          "pass", sampleRoles));
     };
   }
 }

@@ -7,6 +7,6 @@ import com.misiontic.ciclo4.security.models.AppUser;
 
 public interface AppUserRepository extends MongoRepository<AppUser, String> {
 
-  @Query(value = "{'userName': ?0}")
+  @Query(value = "{'username': ?0}")
   AppUser findByUserName(String userName);
 }
