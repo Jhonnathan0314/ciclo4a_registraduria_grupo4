@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Temporal removement for public repo ###
+!**/resources/application.properties
