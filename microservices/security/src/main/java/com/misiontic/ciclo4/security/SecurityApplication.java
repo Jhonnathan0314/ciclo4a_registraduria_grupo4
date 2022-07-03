@@ -26,9 +26,11 @@ public class SecurityApplication {
     return args -> {
       repository
           .save(
-              new AppUser("userOne", "passworsd", "email@email.com", "mysecretpassword", sampleRoles));
+              new AppUser("userOne", "passworsd", "email@email.com", "mysecretpassword",
+                  sampleRoles));
       repository
-          .save(new AppUser("UserTwo", "passworsd", "emailqemail.com", "secretpassword", sampleRoles));
+          .save(new AppUser("UserTwo", "passworsd", "emailqemail.com",
+              "secretpassword", sampleRoles));
     };
   }
 }
