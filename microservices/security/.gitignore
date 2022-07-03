@@ -33,5 +33,4 @@ build/
 .vscode/
 
 ### Temporal removement for public repo ###
-!**/resources/application.properties
-application.properties
+env.properties
