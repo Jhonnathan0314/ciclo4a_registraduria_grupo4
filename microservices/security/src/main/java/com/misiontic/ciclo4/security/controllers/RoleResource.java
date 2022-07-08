@@ -2,6 +2,7 @@ package com.misiontic.ciclo4.security.controllers;
 
 import java.util.List;
 
+import com.misiontic.ciclo4.security.models.PermissionRole;
 import com.misiontic.ciclo4.security.models.Role;
 import com.misiontic.ciclo4.security.services.RoleService;
 
@@ -52,7 +53,7 @@ public class RoleResource {
     }
 
     @PutMapping("/addPermission")
-    public void addPermission(String roleId, String permissionId){
-       roleService.addPermissionToRole(roleId, permissionId);
+    public PermissionRole addPermission(String roleId, String permissionId){
+       return roleService.addPermissionToRole(roleId, permissionId);
     }
 }
