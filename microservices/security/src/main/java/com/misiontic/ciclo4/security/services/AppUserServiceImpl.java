@@ -24,8 +24,10 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
   @Autowired
   private AppUserRepository userRepo;
+
   @Autowired
   private RoleRepository roleRepo;
+
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
 
