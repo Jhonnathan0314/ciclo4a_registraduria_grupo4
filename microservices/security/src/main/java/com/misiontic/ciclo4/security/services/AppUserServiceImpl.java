@@ -40,7 +40,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
   public AppUser addUser(AppUser user) {
     final String encodedPassword = passwordEncoder.encode(user.password());
     final var userWithEncodedPassword = new AppUser(user.id(), user.username(), user.email(), encodedPassword,
-        user.roles());
+        user.role());
     return userRepo.save(userWithEncodedPassword);
   }
 
@@ -64,7 +64,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     final var currentUser = userRepo.findById(userId).get();
     if(currentUser == null) return null;
     final String encodedPassword = passwordEncoder.encode(user.password());
-    final var updatedUser = new AppUser(userId, user.username(), user.email(), encodedPassword, user.roles());
+    final var updatedUser = new AppUser(userId, user.username(), user.email(), encodedPassword, user.role());
     return userRepo.save(updatedUser);
   }
 
@@ -80,9 +80,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     final var user = userRepo.findById(userId).get();
     final var role = roleRepo.findById(roleId).get();
     if(user == null || role == null) return null;
-    final var updatedRoles = user.roles();
-    updatedRoles.add(roleId);
-    final var updatedUser = new AppUser(userId, user.username(), user.email(), user.password(), updatedRoles);
+    final var updatedUser = new AppUser(userId, user.username(), user.email(), user.password(), role);
     return userRepo.save(updatedUser);
   }
 }
