@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.misiontic.ciclo4.security.models.AppUser;
 import com.misiontic.ciclo4.security.repositories.AppUserRepository;
+import com.misiontic.ciclo4.security.repositories.RoleRepository;
 
 @Service
 @Transactional
@@ -23,6 +24,10 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
   @Autowired
   private AppUserRepository userRepo;
+
+  @Autowired
+  private RoleRepository roleRepo;
+
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
 
@@ -32,15 +37,11 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
   }
 
   @Override
-  public void addUser(AppUser user) {
+  public AppUser addUser(AppUser user) {
     final String encodedPassword = passwordEncoder.encode(user.password());
-    final var userWithEncodedPassword = new AppUser(
-        user.id(),
-        user.username(),
-        user.email(),
-        encodedPassword,
-        user.roles());
-    userRepo.save(userWithEncodedPassword);
+    final var userWithEncodedPassword = new AppUser(user.id(), user.username(), user.email(), encodedPassword,
+        user.role());
+    return userRepo.save(userWithEncodedPassword);
   }
 
   @Override
@@ -51,5 +52,35 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     if (user == null)
       throw new UsernameNotFoundException("User not found");
     return new User(user.username(), user.password(), authorities);
+  }
+
+  @Override
+  public List<AppUser> findAll() {
+    return userRepo.findAll();
+  }
+
+  @Override
+  public AppUser updateUser(String userId, AppUser user) {
+    final var currentUser = userRepo.findById(userId).get();
+    if(currentUser == null) return null;
+    final String encodedPassword = passwordEncoder.encode(user.password());
+    final var updatedUser = new AppUser(userId, user.username(), user.email(), encodedPassword, user.role());
+    return userRepo.save(updatedUser);
+  }
+
+  @Override
+  public void delete(String userId) {
+    final var currentUser = userRepo.findById(userId).get();
+    if(currentUser == null) return;
+    userRepo.delete(currentUser);
+  }
+
+  @Override
+  public AppUser addRoleToUser(String userId, String roleId) {
+    final var user = userRepo.findById(userId).get();
+    final var role = roleRepo.findById(roleId).get();
+    if(user == null || role == null) return null;
+    final var updatedUser = new AppUser(userId, user.username(), user.email(), user.password(), role);
+    return userRepo.save(updatedUser);
   }
 }
