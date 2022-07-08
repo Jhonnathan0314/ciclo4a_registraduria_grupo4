@@ -11,7 +11,7 @@ public interface RoleService {
 
     List<Role> findAll();
     Role findRoleById(String id);
-    void addRole(Role role);
+    Role addRole(Role role);
     Role updateRole(String roleId, Role role);
     void deleteRole(String roleId);
     Role addPrivilegeToRole(String roleId, String privilegeId);
