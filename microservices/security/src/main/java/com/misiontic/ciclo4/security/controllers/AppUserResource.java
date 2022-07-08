@@ -47,7 +47,7 @@ public class AppUserResource {
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/delete")
-  public void delete(@RequestBody String userId){
+  public void delete(String userId){
     userService.delete(userId);
   }
 
