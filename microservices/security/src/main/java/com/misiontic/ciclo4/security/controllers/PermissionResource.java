@@ -41,7 +41,7 @@ public class PermissionResource {
     }
 
     @PutMapping("/update")
-    public Permission update(@RequestBody String permissionId, Permission permission){
+    public Permission update(String permissionId, Permission permission){
        return permissionService.updatePermission(permissionId, permission);
     }
 

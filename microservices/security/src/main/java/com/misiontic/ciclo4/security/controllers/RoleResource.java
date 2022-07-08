@@ -41,13 +41,18 @@ public class RoleResource {
     }
 
     @PutMapping("/update")
-    public Role update(@RequestBody String roleId, Role role){
+    public Role update(String roleId,@RequestBody Role role){
         return roleService.updateRole(roleId, role);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/delete")
-    public void delete(@RequestBody String roleId){
+    public void delete(String roleId){
         roleService.deleteRole(roleId);
+    }
+
+    @PutMapping("/addPermission")
+    public void addPermission(String roleId, String permissionId){
+       roleService.addPermissionToRole(roleId, permissionId);
     }
 }

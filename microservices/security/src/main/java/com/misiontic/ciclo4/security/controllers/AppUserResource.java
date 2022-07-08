@@ -41,7 +41,7 @@ public class AppUserResource {
   }
 
   @PutMapping("/update")
-  public AppUser update(@RequestBody String userId, AppUser user){
+  public AppUser update(String userId, @RequestBody AppUser user){
     return userService.updateUser(userId, user);
   }
 
@@ -52,7 +52,7 @@ public class AppUserResource {
   }
 
   @PutMapping("/addRole")
-  public AppUser addRoleToUser(@RequestBody String userId, String roleId){
+  public AppUser addRoleToUser(String userId, String roleId){
     return userService.addRoleToUser(userId, roleId);
   }
 }
