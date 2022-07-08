@@ -2,7 +2,10 @@ package com.misiontic.ciclo4.security.services;
 
 import java.util.List;
 
+import com.misiontic.ciclo4.security.models.PermissionRole;
 import com.misiontic.ciclo4.security.models.Role;
+import com.misiontic.ciclo4.security.repositories.PermissionRepository;
+import com.misiontic.ciclo4.security.repositories.PermissionRoleRepository;
 import com.misiontic.ciclo4.security.repositories.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,10 @@ public class RoleServiceImpl implements RoleService{
 
     @Autowired
     private RoleRepository roleRepo;
+    @Autowired
+    private PermissionRepository permissionRepo;
+    @Autowired
+    private PermissionRoleRepository permissionRoleRepo;
 
     @Override
     public Role addRole(Role role) {
@@ -47,7 +54,11 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
-    public Role addPrivilegeToRole(String roleId, String privilegeId) {
-        return null;
+    public PermissionRole addPermissionToRole(String roleId, String permissionId) {
+        final var permission = permissionRepo.findById(permissionId).get();
+        final var role = roleRepo.findById(roleId).get();
+        if(permission == null || role == null) return null;
+        final var permissionRole = new PermissionRole(permission+roleId, role, permission);
+        return permissionRoleRepo.save(permissionRole);
     }
 }
