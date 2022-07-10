@@ -83,4 +83,10 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
     final var updatedUser = new AppUser(userId, user.username(), user.email(), user.password(), role);
     return userRepo.save(updatedUser);
   }
+
+  @Override
+  public List<AppUser> searchByUsername(String username) {
+    final List<AppUser> matchingUsers = userRepo.searchByUsername(username);
+    return matchingUsers;
+  }
 }
