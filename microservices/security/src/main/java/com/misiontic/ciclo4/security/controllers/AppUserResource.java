@@ -64,11 +64,11 @@ public class AppUserResource {
   }
 
   @GetMapping("/hasAccessToRoute")
-  public ResponseEntity<Boolean> hasAccessToRoute(String token, String path){
+  public ResponseEntity<Boolean> hasAccessToRoute(String token, String path, String method){
     final var algorithm = Algorithm.HMAC256("secret".getBytes());
     final var verifier = JWT.require(algorithm).build();
     final var decoded = verifier.verify(token);
-    final var hasAccess = userService.checkUserPermissionAccessPath(decoded.getSubject(), path);
+    final var hasAccess = userService.checkUserPermissionAccessPath(decoded.getSubject(), path, method);
     if(hasAccess)
       return ResponseEntity.ok().body(true);
     else
