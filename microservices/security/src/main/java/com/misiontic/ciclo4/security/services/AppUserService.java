@@ -7,6 +7,7 @@ import com.misiontic.ciclo4.security.models.AppUser;
 public interface AppUserService {
 
   List<AppUser> findAll();
+  List<AppUser> searchByUsername(String username);
   AppUser findUserById(String userId);
   AppUser addUser(AppUser user);
   AppUser updateUser(String userId, AppUser user);

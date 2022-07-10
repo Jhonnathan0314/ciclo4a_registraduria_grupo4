@@ -34,6 +34,11 @@ public class AppUserResource {
     return ResponseEntity.ok().body(userService.findAll());
   }
 
+  @GetMapping("/searchByUsername")
+  public ResponseEntity<List<AppUser>> searchByUsername(String username){
+    return ResponseEntity.ok().body(userService.searchByUsername(username));
+  }
+
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping("/create")
   public AppUser create(@RequestBody AppUser user){
