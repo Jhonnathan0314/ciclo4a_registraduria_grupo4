@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.misiontic.ciclo4.security.models.AppUser;
 import com.misiontic.ciclo4.security.services.AppUserService;
 
@@ -59,5 +61,17 @@ public class AppUserResource {
   @PutMapping("/addRole")
   public AppUser addRoleToUser(String userId, String roleId){
     return userService.addRoleToUser(userId, roleId);
+  }
+
+  @GetMapping("/hasAccessToRoute")
+  public ResponseEntity<Boolean> hasAccessToRoute(String token, String path){
+    final var algorithm = Algorithm.HMAC256("secret".getBytes());
+    final var verifier = JWT.require(algorithm).build();
+    final var decoded = verifier.verify(token);
+    final var hasAccess = userService.checkUserPermissionAccessPath(decoded.getSubject(), path);
+    if(hasAccess)
+      return ResponseEntity.ok().body(true);
+    else
+      return ResponseEntity.status(401).build();
   }
 }
