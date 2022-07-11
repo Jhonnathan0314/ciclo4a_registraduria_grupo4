@@ -9,6 +9,7 @@ public interface AppUserService {
   List<AppUser> findAll();
   List<AppUser> searchByUsername(String username);
   AppUser findUserById(String userId);
+  Boolean checkUserPermissionAccessPath(String username, String path, String method);
   AppUser addUser(AppUser user);
   AppUser updateUser(String userId, AppUser user);
   void delete(String userId);

@@ -2,6 +2,7 @@ package com.misiontic.ciclo4.security.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.misiontic.ciclo4.security.models.AppUser;
+import com.misiontic.ciclo4.security.models.PermissionRole;
+import com.misiontic.ciclo4.security.models.Role;
 import com.misiontic.ciclo4.security.repositories.AppUserRepository;
+import com.misiontic.ciclo4.security.repositories.PermissionRoleRepository;
 import com.misiontic.ciclo4.security.repositories.RoleRepository;
 
 @Service
@@ -24,9 +28,10 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
 
   @Autowired
   private AppUserRepository userRepo;
-
   @Autowired
   private RoleRepository roleRepo;
+  @Autowired
+  private PermissionRoleRepository permissionRoleRepo;
 
   @Autowired
   private BCryptPasswordEncoder passwordEncoder;
@@ -88,5 +93,18 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
   public List<AppUser> searchByUsername(String username) {
     final List<AppUser> matchingUsers = userRepo.searchByUsername(username);
     return matchingUsers;
+  }
+
+  @Override
+  public Boolean checkUserPermissionAccessPath(String username, String path, String method) {
+    final Role userRole = userRepo.findByUserName(username).role();
+    if(userRole == null) return false;
+    final List<PermissionRole> permissions = permissionRoleRepo.findAll()
+      .stream().filter(permission -> permission.role().equals(userRole))
+      .collect(Collectors.toList());
+    return permissions.parallelStream()
+      .anyMatch(permissionRole ->
+                permissionRole.permission().url().equalsIgnoreCase(path) &&
+                permissionRole.permission().method().equalsIgnoreCase(method));
   }
 }
