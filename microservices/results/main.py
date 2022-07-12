@@ -28,11 +28,11 @@ result_controller = ResultController()
 
 #variables para conexiona la bd
 ca = certifi.where()
-client = pymongo.MongoClient("mongodb+srv://sampledatabase:CRRtBzQwwGDnafmd@cluster0.aoo5lnr.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=ca)
+client = pymongo.MongoClient("mongodb+srv://jonatan314:jonatan@cluster0.ub195.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=ca)
 db = client.test
 print(db)
 
-result_db = client["Testing"]
+result_db = client["bd-results-backend"]
 print(result_db.list_collection_names())
 
 
@@ -189,9 +189,30 @@ def delete_result(id):
     return jsonify(response)
 
 
-@app.route("/result/table/<string:id_table>", methods=["PUT"])
-def get_results_by_table(id_table):
+"""
+----------- REPORT ENDPOINTS -----------
+"""
+@app.route("/report/table/<string:id_table>", methods=["PUT"])
+def get_report_by_table(id_table):
     response = table_controller.findReportByTable(id_table)
+    return jsonify(response)
+
+
+@app.route("/report/table/<string:id_table>/candidate/<string:id_candidate>/party/<string:id_party>", methods=["GET"])
+def get_report_votes(id_table, id_candidate, id_party):
+    response = table_controller.findReportVotes(id_table, id_candidate, id_party)
+    return jsonify(response)
+
+
+@app.route("/report/table/<string:id_table>/party/<string:id_party>", methods=["GET"])
+def get_report_party(id_table, id_party):
+    response = table_controller.findReportVotesPartyInTable(id_table, id_party)
+    return jsonify(response)
+
+
+@app.route("/report/percentage", methods=["GET"])
+def get_report_percentage():
+    response = table_controller.findReportPercentage()
     return jsonify(response)
 
 
