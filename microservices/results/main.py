@@ -28,11 +28,11 @@ result_controller = ResultController()
 
 #variables para conexiona la bd
 ca = certifi.where()
-client = pymongo.MongoClient("mongodb+srv://jonatan314:jonatan@cluster0.ub195.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=ca)
+client = pymongo.MongoClient("mongodb+srv://sampledatabase:CRRtBzQwwGDnafmd@cluster0.aoo5lnr.mongodb.net/?retryWrites=true&w=majority", tlsCAFile=ca)
 db = client.test
 print(db)
 
-result_db = client["bd-results-backend"]
+result_db = client["Testing"]
 print(result_db.list_collection_names())
 
 
