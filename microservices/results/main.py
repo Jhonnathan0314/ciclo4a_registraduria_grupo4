@@ -78,6 +78,12 @@ def delete_table(id):
     return jsonify(response)
 
 
+@app.route("/table/max-votes", methods=["GET"])
+def find_max_votes():
+    response = table_controller.findMaxNumVotes()
+    return jsonify(response)
+
+
 """
 ----------- CANDIDATE ENDPOINTS -----------
 """
@@ -180,6 +186,12 @@ def update_result(id_result, id_table, id_party):
 @app.route("/result/<string:id>", methods=["DELETE"])
 def delete_result(id):
     response = result_controller.delete(id)
+    return jsonify(response)
+
+
+@app.route("/result/table/<string:id_table>", methods=["PUT"])
+def get_results_by_table(id_table):
+    response = table_controller.findReportByTable(id_table)
     return jsonify(response)
 
 

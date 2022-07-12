@@ -14,7 +14,7 @@ class InterfaceRepository(Generic[T]):
         ca = certifi.where()
 
         dataConfig = self.loadFileConfig()
-        client = pymongo.MongoClient(dataConfig["data-db-connection"], tlsCAFile=ca)
+        client = pymongo.MongoClient(dataConfig["data-db-conection"], tlsCAFile=ca)
         self.baseDatos = client[dataConfig["name-db"]]
         theClass = get_args(self.__orig_bases__[0])
         self.coleccion = theClass[0].__name__.lower()
@@ -90,6 +90,17 @@ class InterfaceRepository(Generic[T]):
         laColeccion = self.baseDatos[self.coleccion]
         data = []
         for x in laColeccion.find(theQuery):
+            x["_id"] = x["_id"].__str__()
+            x = self.transformObjectIds(x)
+            x = self.getValuesDBRef(x)
+            data.append(x)
+        return data
+
+
+    def queryAggregation(self, theQuery):
+        laColeccion = self.baseDatos[self.coleccion]
+        data = []
+        for x in laColeccion.aggregate(theQuery):
             x["_id"] = x["_id"].__str__()
             x = self.transformObjectIds(x)
             x = self.getValuesDBRef(x)

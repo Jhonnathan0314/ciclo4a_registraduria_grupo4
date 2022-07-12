@@ -6,6 +6,7 @@ from models.table import Table
 from models.party import Party
 
 
+
 class ResultController():
     def __init__(self):
         self.resultRepository = ResultRepository()
@@ -41,9 +42,22 @@ class ResultController():
         party = Party(self.partyRepository.findById(id_party))
         old_result.table = table
         old_result.party = party
+        old_result.votes = info["votes"]
         return self.resultRepository.save(old_result)
 
 
     def delete(self, id):
         print("Eliminando un resultado")
         return self.resultRepository.delete(id)
+
+
+    # METODO PARA OBTENER TODOS LOS RESULTADOS POR MESA
+    def findByTable(self, id_table):
+        print("Listando resultados por mesa")
+        return self.resultRepository.findByTable(id_table)
+
+
+    # METODO PARA OBTENER TODOS LOS RESULTADOS POR MESA
+    def findByParty(self, id_party):
+        print("Listando resultados por partido")
+        return self.resultRepository.findByParty(id_party)
