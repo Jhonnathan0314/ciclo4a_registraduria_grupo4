@@ -1,4 +1,4 @@
-package com.misiontic.ciclo4.security;
+package com.mintic.security;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
