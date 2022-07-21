@@ -61,14 +61,15 @@ def before_request_callback():
 
 def validate_permission(role_id, route, method):
     headers = {"Content-Type": "application/json; charset=utf-8"}
-    url = dataConfig["url-security"] + "/permission-role/validate/role/" + role_id
+    url = dataConfig["url-security"] + "/role-permission/validate/role/" + role_id
     body = {"url": route, "method": method}
+    print(url)
     print(body)
     response = requests.post(url, json=body, headers=headers)
     print(response)
     try:
         data = response.json()
-        if "_id" in data:
+        if "id" in data:
             return True
     except:
         return False
@@ -102,6 +103,58 @@ def login():
         expires = datetime.timedelta(seconds=60*60*24)
         access_token = create_access_token(identity=user, expires_delta=expires)
         return jsonify({"token": access_token, "user_id": user["_id"]})
+
+
+"""
+-------------------EJEMPLOS GUIA HECHOS EN CLASE, BORRAR AL FINAL------------------
+"""
+@app.route("/students", methods=["GET"])
+def get_students():
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-academic"] + "/students"
+    print("get_students: " + url)
+    response = requests.get(url, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/student/<string:id>", methods=["GET"])
+def get_student(id):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-academic"] + "/student/" + id
+    response = requests.get(url, headers=headers)
+    return response.json()
+
+
+@app.route("/student", methods=["POST"])
+def create_student():
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-academic"] + "/student"
+    body = request.get_json()
+    response = requests.post(url, json=body, headers=headers)
+    return response.json()
+
+
+@app.route("/student/<string:id>", methods=["PUT"])
+def update_student(id):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-academic"] + "/student" + id
+    body = request.get_json()
+    response = requests.put(url, json=body, headers=headers)
+    return response.json()
+
+
+@app.route("/student/<string:id>", methods=["DELETE"])
+def delete_student(id):
+    headers = {"Content-Type": "application/json; charset=utf-8"}
+    url = dataConfig["url-academic"] + "/student" + id
+    body = request.get_json()
+    response = requests.delete(url, headers=headers)
+    return response.json()
+
+
+"""
+--------------------------SPRING - USER------------------------------
+"""
 
 
 # ------------------------- Server -------------------------------

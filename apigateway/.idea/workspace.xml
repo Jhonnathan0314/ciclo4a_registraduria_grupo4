@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5531473-5340-41ad-817f-2dae502b3645" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../apigateway/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apigateway/.idea/apigateway.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../apigateway/.idea/apigateway.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apigateway/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../apigateway/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apigateway/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../apigateway/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apigateway/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../apigateway/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../apigateway/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../apigateway/main.py" afterDir="false" />
+    <list default="true" id="20340817-5e83-4605-9d8a-dbb3a2c50682" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/apigateway.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/apigateway.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/results.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/results.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../microservices/results/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../microservices/results/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../microservices/results/.idea/results.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../microservices/results/.idea/results.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../microservices/results/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../microservices/results/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,12 +21,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2BqbF8T0080DQ9xSl93OHZzJHC2" />
+  <component name="ProjectId" id="2CGzZfjJdKIs8BCv91HbamAWzeL" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,21 +36,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Datos/Mintic/Ciclo 4/Programacion/Github/backends/ciclo4a_registraduria_grupo4/apigateway",
+    "last_opened_file_path": "C:/Users/Jonatan/PycharmProjects/Gateway Clase",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Datos\Mintic\Ciclo 4\Programacion\Github\backends\ciclo4a_registraduria_grupo4\microservices\results" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Datos\Mintic\Ciclo 4\Programacion\Github\backends\ciclo4a_registraduria_grupo4\microservices\results" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="results" />
+      <module name="apigateway" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -74,23 +66,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c5531473-5340-41ad-817f-2dae502b3645" name="Changes" comment="" />
-      <created>1657636455992</created>
+      <changelist id="20340817-5e83-4605-9d8a-dbb3a2c50682" name="Changes" comment="" />
+      <created>1658443766692</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1657636455992</updated>
+      <updated>1658443766692</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>
