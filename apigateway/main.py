@@ -15,7 +15,6 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 
-
 # ------------------------- Setting Flask App -------------------------------
 app = Flask(__name__)
 cors = CORS(app)
@@ -25,7 +24,11 @@ def loadFileConfig():
     with open("config.json") as f:
         data = json.load(f)
     return data
+
+
 dataConfig = loadFileConfig()
+
+headers = {"Content-Type": "application/json; charset=utf-8"}
 
 
 # ------------------------- Middleware -------------------------------
@@ -60,7 +63,6 @@ def before_request_callback():
 
 
 def validate_permission(role_id, route, method):
-    headers = {"Content-Type": "application/json; charset=utf-8"}
     url = dataConfig["url-security"] + "/role-permission/validate/role/" + role_id
     body = {"url": route, "method": method}
     print(url)
@@ -91,7 +93,6 @@ def login():
     # FE -> AGW
     data = request.get_json()
     # AGW -> MS
-    headers = {"Content-Type": "application/json; charset=utf-8"}
     url = dataConfig["url-security"] + "/user/validate"
     response = requests.post(url, json=data, headers=headers)
     if response.status_code == 401:
@@ -100,61 +101,200 @@ def login():
         return jsonify({"msg": "Error inesperado"}), 500
     elif response.status_code == 200:
         user = response.json()
-        expires = datetime.timedelta(seconds=60*60*24)
+        expires = datetime.timedelta(seconds=60 * 60 * 24)
         access_token = create_access_token(identity=user, expires_delta=expires)
         return jsonify({"token": access_token, "user_id": user["_id"]})
 
 
 """
--------------------EJEMPLOS GUIA HECHOS EN CLASE, BORRAR AL FINAL------------------
+--------------------------SPRING - USER------------------------------
 """
-@app.route("/students", methods=["GET"])
-def get_students():
-    headers = {"Content-Type": "application/json; charset=utf-8"}
-    url = dataConfig["url-academic"] + "/students"
-    print("get_students: " + url)
-    response = requests.get(url, headers=headers)
+
+
+@app.route("/user", methods=["GET"])
+def get_users():
+    url_security = dataConfig["url-security"] + "/user"
+    response = requests.get(url_security, headers=headers)
     return jsonify(response.json())
 
 
-@app.route("/student/<string:id>", methods=["GET"])
-def get_student(id):
-    headers = {"Content-Type": "application/json; charset=utf-8"}
-    url = dataConfig["url-academic"] + "/student/" + id
-    response = requests.get(url, headers=headers)
-    return response.json()
+@app.route("/user/<string:id>", methods=["GET"])
+def get_user(id):
+    url_security = dataConfig["url-security"] + "/user/" + id
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
 
 
-@app.route("/student", methods=["POST"])
-def create_student():
-    headers = {"Content-Type": "application/json; charset=utf-8"}
-    url = dataConfig["url-academic"] + "/student"
+@app.route("/user", methods=["POST"])
+def create_user():
     body = request.get_json()
-    response = requests.post(url, json=body, headers=headers)
-    return response.json()
+    url_security = dataConfig["url-security"] + "/user"
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
 
 
-@app.route("/student/<string:id>", methods=["PUT"])
-def update_student(id):
-    headers = {"Content-Type": "application/json; charset=utf-8"}
-    url = dataConfig["url-academic"] + "/student" + id
+@app.route("/user/<string:id>", methods=["PUT"])
+def update_user(id):
     body = request.get_json()
-    response = requests.put(url, json=body, headers=headers)
-    return response.json()
+    url_security = dataConfig["url-security"] + "/user/" + id
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
 
 
-@app.route("/student/<string:id>", methods=["DELETE"])
-def delete_student(id):
-    headers = {"Content-Type": "application/json; charset=utf-8"}
-    url = dataConfig["url-academic"] + "/student" + id
+@app.route("/user/<string:id>", methods=["DELETE"])
+def delete_user(id):
+    url_security = dataConfig["url-security"] + "/user/" + id
+    response = requests.delete(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/user/<string:id_user/role/<string:id_role>", methods=["PUT"])
+def add_role_to_user(id_user, id_role):
+    url_security = dataConfig["url-security"] + "/user/" + id_user + "/role/" + id_role
+    response = requests.put(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/user/validate", methods=["POST"])
+def validate_user():
     body = request.get_json()
-    response = requests.delete(url, headers=headers)
-    return response.json()
+    url_security = dataConfig["url-security"] + "/user/validate"
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
 
 
 """
---------------------------SPRING - USER------------------------------
+--------------------------SPRING - ROLE------------------------------
 """
+
+
+@app.route("/role", methods=["GET"])
+def get_roles():
+    url_security = dataConfig["url-security"] + "/role"
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role/<string:id>", methods=["GET"])
+def get_role(id):
+    url_security = dataConfig["url-security"] + "/role/" + id
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role", methods=["POST"])
+def create_role():
+    body = request.get_json()
+    url_security = dataConfig["url-security"] + "/role"
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role/<string:id>", methods=["PUT"])
+def update_role(id):
+    body = request.get_json()
+    url_security = dataConfig["url-security"] + "/role/" + id
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role/<string:id>", methods=["DELETE"])
+def delete_role(id):
+    url_security = dataConfig["url-security"] + "/role/" + id
+    response = requests.delete(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+"""
+--------------------------SPRING - PERMISSION------------------------------
+"""
+
+
+@app.route("/permission", methods=["GET"])
+def get_permissions():
+    url_security = dataConfig["url-security"] + "/permission"
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/permission/<string:id>", methods=["GET"])
+def get_permission(id):
+    url_security = dataConfig["url-security"] + "/permission/" + id
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/permission", methods=["POST"])
+def create_permission():
+    body = request.get_json()
+    url_security = dataConfig["url-security"] + "/permission"
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/permission/<string:id>", methods=["PUT"])
+def update_permission(id):
+    body = request.get_json()
+    url_security = dataConfig["url-security"] + "/permission/" + id
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/permission/<string:id>", methods=["DELETE"])
+def delete_permission(id):
+    url_security = dataConfig["url-security"] + "/permission/" + id
+    response = requests.delete(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+"""
+--------------------------SPRING - ROLEPERMISSION------------------------------
+"""
+
+
+@app.route("/role-permission", methods=["GET"])
+def get_role_permissions():
+    url_security = dataConfig["url-security"] + "/role-permission"
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role-permission/<string:id>", methods=["GET"])
+def get_role_permission(id):
+    url_security = dataConfig["url-security"] + "/role-permission/" + id
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role-permission/role/<string:id_role>/permission/<string:id_permission>", methods=["POST"])
+def create_role_permission(id_role, id_permission):
+    body = request.get_json()
+    url_security = dataConfig["url-security"] + "/role-permission/role/" + id_role + "/permission/" + id_permission
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role-permission/<string:id_role_permission/role/<string:id_role>/permission/<string:id_permission>", methods=["PUT"])
+def update_user(id_role_permission, id_role, id_permission):
+    body = request.get_json()
+    url_security = dataConfig["url-security"] + "/role-permission/" + id_role_permission + "/role/" + id_role + "/permission/" + id_permission
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role-permission/<string:id>", methods=["DELETE"])
+def delete_user(id):
+    url_security = dataConfig["url-security"] + "/role-permission/" + id
+    response = requests.delete(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/role-permission/validate/role/<string:id_role>", methods=["POST"])
+def validate_role_permission(id_role):
+    body = request.get_json()
+    url_security = dataConfig["url-security"] + "/role-permission/validate/role/" + id_role
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
 
 
 # ------------------------- Server -------------------------------

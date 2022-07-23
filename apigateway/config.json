@@ -2,6 +2,6 @@
   "url-apigateway": "127.0.0.1",
   "port-apigateway": "7776",
   "url-security": "http://127.0.0.1:8887",
-  "url-academic": "http://127.0.0.1:9998",
+  "url-results": "http://127.0.0.1:9998",
   "jwt-key": "super-secret"
 }

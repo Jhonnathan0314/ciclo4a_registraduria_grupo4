@@ -62,7 +62,7 @@ public class UserController {
 		if(user != null) {
 			user.setPseudonym(info.getPseudonym());
 			user.setEmail(info.getEmail());
-			String password = info.getPassword();
+			String password = convertSHA256(info.getPassword());
 			user.setPassword(password);
 			return this.userRepository.save(user);
 		}else {
