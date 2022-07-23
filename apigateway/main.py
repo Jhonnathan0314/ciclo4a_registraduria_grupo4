@@ -148,7 +148,7 @@ def delete_user(id):
     return jsonify(response.json())
 
 
-@app.route("/user/<string:id_user/role/<string:id_role>", methods=["PUT"])
+@app.route("/user/<string:id_user>/role/<string:id_role>", methods=["PUT"])
 def add_role_to_user(id_user, id_role):
     url_security = dataConfig["url-security"] + "/user/" + id_user + "/role/" + id_role
     response = requests.put(url_security, headers=headers)
@@ -274,8 +274,8 @@ def create_role_permission(id_role, id_permission):
     return jsonify(response.json())
 
 
-@app.route("/role-permission/<string:id_role_permission/role/<string:id_role>/permission/<string:id_permission>", methods=["PUT"])
-def update_user(id_role_permission, id_role, id_permission):
+@app.route("/role-permission/<string:id_role_permission>/role/<string:id_role>/permission/<string:id_permission>", methods=["PUT"])
+def update_role_permission(id_role_permission, id_role, id_permission):
     body = request.get_json()
     url_security = dataConfig["url-security"] + "/role-permission/" + id_role_permission + "/role/" + id_role + "/permission/" + id_permission
     response = requests.put(url_security, json=body, headers=headers)
@@ -283,7 +283,7 @@ def update_user(id_role_permission, id_role, id_permission):
 
 
 @app.route("/role-permission/<string:id>", methods=["DELETE"])
-def delete_user(id):
+def delete_role_permission(id):
     url_security = dataConfig["url-security"] + "/role-permission/" + id
     response = requests.delete(url_security, headers=headers)
     return jsonify(response.json())
