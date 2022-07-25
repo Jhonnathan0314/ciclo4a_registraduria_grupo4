@@ -5,7 +5,7 @@ from flask import request
 from flask_cors import CORS
 from waitress import serve
 # Utils
-import json
+import json, sys
 import requests
 import datetime
 import re
@@ -342,7 +342,7 @@ def delete_table(id):
 
 @app.route("/party", methods=["GET"])
 def get_parties():
-    url_security = dataConfig["url-results"] + "/table"
+    url_security = dataConfig["url-results"] + "/party"
     response = requests.get(url_security, headers=headers)
     return jsonify(response.json())
 
@@ -469,7 +469,7 @@ def delete_result(id):
 @app.route("/report/table/<string:id_table>", methods=["PUT"])
 def get_report_by_table(id_table):
     url_security = dataConfig["url-results"] + "/report/table/" + id_table
-    response = requests.get(url_security, headers=headers)
+    response = requests.put(url_security, headers=headers)
     return jsonify(response.json())
 
 
@@ -482,17 +482,15 @@ def get_report_votes(id_table, id_candidate, id_party):
 
 @app.route("/report/table/<string:id_table>/party/<string:id_party>", methods=["GET"])
 def get_report_party(id_table, id_party):
-    body = request.get_json()
     url_security = dataConfig["url-results"] + "/report/table/" + id_table + "/party/" + id_party
-    response = requests.post(url_security, json=body, headers=headers)
+    response = requests.get(url_security, headers=headers)
     return jsonify(response.json())
 
 
 @app.route("/report/percentage", methods=["GET"])
-def get_report_percentage(id):
-    body = request.get_json()
-    url_security = dataConfig["url-results"] + "/report/percentage" + id
-    response = requests.put(url_security, json=body, headers=headers)
+def get_report_percentage():
+    url_security = dataConfig["url-results"] + "/report/percentage"
+    response = requests.get(url_security, headers=headers)
     return jsonify(response.json())
 
 
