@@ -50,7 +50,6 @@ def before_request_callback():
             return jsonify({"msg": "Permission Denied"}), 401
         # Roles and Permissions
         user = get_jwt_identity()
-        print(user)
         if user["role"] is None:
             return jsonify({"msg": "Permission Denied"}), 401
         else:
@@ -65,10 +64,7 @@ def before_request_callback():
 def validate_permission(role_id, route, method):
     url = dataConfig["url-security"] + "/role-permission/validate/role/" + role_id
     body = {"url": route, "method": method}
-    print(url)
-    print(body)
     response = requests.post(url, json=body, headers=headers)
-    print(response)
     try:
         data = response.json()
         if "id" in data:
@@ -297,7 +293,212 @@ def validate_role_permission(id_role):
     return jsonify(response.json())
 
 
+"""
+--------------------------FLASK - TABLE------------------------------
+"""
+
+
+@app.route("/table", methods=["GET"])
+def get_tables():
+    url_security = dataConfig["url-results"] + "/table"
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/table/<string:id>", methods=["GET"])
+def get_table(id):
+    url_security = dataConfig["url-results"] + "/table/" + id
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/table", methods=["POST"])
+def create_table():
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/table"
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/table/<string:id>", methods=["PUT"])
+def update_table(id):
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/table/" + id
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/table/<string:id>", methods=["DELETE"])
+def delete_table(id):
+    url_security = dataConfig["url-results"] + "/table/" + id
+    response = requests.delete(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+"""
+--------------------------FLASK - PARTY------------------------------
+"""
+
+
+@app.route("/party", methods=["GET"])
+def get_parties():
+    url_security = dataConfig["url-results"] + "/table"
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/party/<string:id>", methods=["GET"])
+def get_party(id):
+    url_security = dataConfig["url-results"] + "/party/" + id
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/party", methods=["POST"])
+def create_party():
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/party"
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/party/<string:id>", methods=["PUT"])
+def update_party(id):
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/party/" + id
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/party/<string:id>", methods=["DELETE"])
+def delete_party(id):
+    url_security = dataConfig["url-results"] + "/party/" + id
+    response = requests.delete(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+"""
+--------------------------FLASK - CANDIDATES------------------------------
+"""
+
+
+@app.route("/candidate", methods=["GET"])
+def get_candidates():
+    url_security = dataConfig["url-results"] + "/candidate"
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/candidate/<string:id>", methods=["GET"])
+def get_candidate(id):
+    url_security = dataConfig["url-results"] + "/candidate/" + id
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/candidate/party/<string:id_party>", methods=["POST"])
+def create_candidate(id_party):
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/candidate/party/" + id_party
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/candidate/<string:id_candidate>/party/<string:id_party>", methods=["PUT"])
+def update_candidate(id_candidate, id_party):
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/candidate/" + id_candidate + "/party/" + id_party
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/candidate/<string:id>", methods=["DELETE"])
+def delete_candidate(id):
+    url_security = dataConfig["url-results"] + "/candidate/" + id
+    response = requests.delete(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+"""
+--------------------------FLASK - RESULTS------------------------------
+"""
+
+
+@app.route("/result", methods=["GET"])
+def get_results():
+    url_security = dataConfig["url-results"] + "/result"
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/result/<string:id>", methods=["GET"])
+def get_result(id):
+    url_security = dataConfig["url-results"] + "/result/" + id
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/result/table/<string:id_table>/party/<string:id_party>", methods=["POST"])
+def create_result(id_table, id_party):
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/result/table/" + id_table + "/party/" + id_party
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/result/<string:id_result>/table/<string:id_table>/party/<string:id_party>", methods=["PUT"])
+def update_result(id_result, id_table, id_party):
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/result/" + id_result + "/table/" + id_table + "/party/" + id_party
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/result/<string:id>", methods=["DELETE"])
+def delete_result(id):
+    url_security = dataConfig["url-results"] + "/result/" + id
+    response = requests.delete(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+"""
+--------------------------FLASK - REPORT------------------------------
+"""
+
+
+@app.route("/report/table/<string:id_table>", methods=["PUT"])
+def get_report_by_table(id_table):
+    url_security = dataConfig["url-results"] + "/report/table/" + id_table
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/report/table/<string:id_table>/candidate/<string:id_candidate>/party/<string:id_party>", methods=["GET"])
+def get_report_votes(id_table, id_candidate, id_party):
+    url_security = dataConfig["url-results"] + "/report/table/" + id_table + "/candidate/" + id_candidate + "/party/" + id_party
+    response = requests.get(url_security, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/report/table/<string:id_table>/party/<string:id_party>", methods=["GET"])
+def get_report_party(id_table, id_party):
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/report/table/" + id_table + "/party/" + id_party
+    response = requests.post(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
+@app.route("/report/percentage", methods=["GET"])
+def get_report_percentage(id):
+    body = request.get_json()
+    url_security = dataConfig["url-results"] + "/report/percentage" + id
+    response = requests.put(url_security, json=body, headers=headers)
+    return jsonify(response.json())
+
+
 # ------------------------- Server -------------------------------
+
+
 url = "http://" + dataConfig["url-apigateway"] + ":" + dataConfig["port-apigateway"];
 print("Server running: " + url)
 serve(app, host=dataConfig["url-apigateway"], port=dataConfig["port-apigateway"])

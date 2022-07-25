@@ -46,12 +46,8 @@ class TableController():
         return self.tableRepository.delete(id)
 
 
-    def findMaxNumVotes(self):
-        return self.tableRepository.findMaxNumVotes()
-
-
     def findReportByTable(self, id_table):
-        print()
+        print("Rerpor por mesa")
         results = self.resultRepository.findByTable(id_table)
         total_votes = 0
         for votes in results:
@@ -128,6 +124,6 @@ class TableController():
             reports.insert(i, {
                 "party": name_per_party[i],
                 "votes": votes_per_party[i],
-                "percentage": "{:.2f}".format(((votes_per_party[i]/total_votes)*100)) + "%"
+                "percentage": "{:.2f}".format(((votes_per_party[i]/total_votes)*100))
             })
         return reports

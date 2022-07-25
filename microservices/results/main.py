@@ -78,10 +78,7 @@ def delete_table(id):
     return jsonify(response)
 
 
-@app.route("/table/max-votes", methods=["GET"])
-def find_max_votes():
-    response = table_controller.findMaxNumVotes()
-    return jsonify(response)
+
 
 
 """
@@ -192,6 +189,8 @@ def delete_result(id):
 """
 ----------- REPORT ENDPOINTS -----------
 """
+
+
 @app.route("/report/table/<string:id_table>", methods=["PUT"])
 def get_report_by_table(id_table):
     response = table_controller.findReportByTable(id_table)
