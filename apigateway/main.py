@@ -438,18 +438,18 @@ def get_result(id):
     return jsonify(response.json())
 
 
-@app.route("/result/table/<string:id_table>/party/<string:id_party>", methods=["POST"])
-def create_result(id_table, id_party):
+@app.route("/result/table/<string:id_table>/candidate/<string:id_candidate>", methods=["POST"])
+def create_result(id_table, id_candidate):
     body = request.get_json()
-    url_security = dataConfig["url-results"] + "/result/table/" + id_table + "/party/" + id_party
+    url_security = dataConfig["url-results"] + "/result/table/" + id_table + "/candidate/" + id_candidate
     response = requests.post(url_security, json=body, headers=headers)
     return jsonify(response.json())
 
 
-@app.route("/result/<string:id_result>/table/<string:id_table>/party/<string:id_party>", methods=["PUT"])
-def update_result(id_result, id_table, id_party):
+@app.route("/result/<string:id_result>/table/<string:id_table>/candidate/<string:id_candidate>", methods=["PUT"])
+def update_result(id_result, id_table, id_candidate):
     body = request.get_json()
-    url_security = dataConfig["url-results"] + "/result/" + id_result + "/table/" + id_table + "/party/" + id_party
+    url_security = dataConfig["url-results"] + "/result/" + id_result + "/table/" + id_table + "/candidate/" + id_candidate
     response = requests.put(url_security, json=body, headers=headers)
     return jsonify(response.json())
 
@@ -466,23 +466,16 @@ def delete_result(id):
 """
 
 
-@app.route("/report/table/<string:id_table>", methods=["PUT"])
-def get_report_by_table(id_table):
-    url_security = dataConfig["url-results"] + "/report/table/" + id_table
+@app.route("/report", methods=["PUT"])
+def get_report():
+    url_security = dataConfig["url-results"] + "/report"
     response = requests.put(url_security, headers=headers)
     return jsonify(response.json())
 
 
-@app.route("/report/table/<string:id_table>/candidate/<string:id_candidate>/party/<string:id_party>", methods=["GET"])
-def get_report_votes(id_table, id_candidate, id_party):
-    url_security = dataConfig["url-results"] + "/report/table/" + id_table + "/candidate/" + id_candidate + "/party/" + id_party
-    response = requests.get(url_security, headers=headers)
-    return jsonify(response.json())
-
-
-@app.route("/report/table/<string:id_table>/party/<string:id_party>", methods=["GET"])
-def get_report_party(id_table, id_party):
-    url_security = dataConfig["url-results"] + "/report/table/" + id_table + "/party/" + id_party
+@app.route("/report/parties", methods=["GET"])
+def get_report_party():
+    url_security = dataConfig["url-results"] + "/report/parties"
     response = requests.get(url_security, headers=headers)
     return jsonify(response.json())
 

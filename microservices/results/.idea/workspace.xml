@@ -8,6 +8,10 @@
       <change beforePath="$PROJECT_DIR$/../../apigateway/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../apigateway/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../apigateway/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../apigateway/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/resultController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/resultController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/tableController.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/tableController.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repositories/resultRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/repositories/resultRepository.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

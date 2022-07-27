@@ -166,17 +166,17 @@ def get_result(id):
     return jsonify(response)
 
 
-@app.route("/result/table/<string:id_table>/party/<string:id_party>", methods=["POST"])
-def create_result(id_table, id_party):
+@app.route("/result/table/<string:id_table>/candidate/<string:id_candidate>", methods=["POST"])
+def create_result(id_table, id_candidate):
     info = request.get_json()
-    response = result_controller.create(info, id_table, id_party)
+    response = result_controller.create(info, id_table, id_candidate)
     return jsonify(response)
 
 
-@app.route("/result/<string:id_result>/table/<string:id_table>/party/<string:id_party>", methods=["PUT"])
-def update_result(id_result, id_table, id_party):
+@app.route("/result/<string:id_result>/table/<string:id_table>/candidate/<string:id_candidate>", methods=["PUT"])
+def update_result(id_result, id_table, id_candidate):
     info = request.get_json()
-    response = result_controller.update(info, id_result, id_table, id_party)
+    response = result_controller.update(info, id_result, id_table, id_candidate)
     return jsonify(response)
 
 
@@ -191,21 +191,15 @@ def delete_result(id):
 """
 
 
-@app.route("/report/table/<string:id_table>", methods=["PUT"])
-def get_report_by_table(id_table):
-    response = table_controller.findReportByTable(id_table)
+@app.route("/report", methods=["PUT"])
+def get_report():
+    response = result_controller.orderTableReport()
     return jsonify(response)
 
 
-@app.route("/report/table/<string:id_table>/candidate/<string:id_candidate>/party/<string:id_party>", methods=["GET"])
-def get_report_votes(id_table, id_candidate, id_party):
-    response = table_controller.findReportVotes(id_table, id_candidate, id_party)
-    return jsonify(response)
-
-
-@app.route("/report/table/<string:id_table>/party/<string:id_party>", methods=["GET"])
-def get_report_party(id_table, id_party):
-    response = table_controller.findReportVotesPartyInTable(id_table, id_party)
+@app.route("/report/parties", methods=["GET"])
+def get_report_parties():
+    response = result_controller.partiesReport()
     return jsonify(response)
 
 

@@ -9,12 +9,6 @@ class ResultRepository(InterfaceRepository[Result]):
         return self.query(query)
 
 
-    # METODO PARA OBTENER TODOS LOS RESULTADOS POR MESA
-    def findByParty(self, id_party):
-        query = {"party.$id": ObjectId(id_party)}
-        return self.query(query)
-
-
     def findByTableAndParty(self, id_table, id_party):
         query1 = {
             "$match": {

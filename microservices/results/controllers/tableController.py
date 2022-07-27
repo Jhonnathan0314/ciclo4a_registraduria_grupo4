@@ -46,14 +46,10 @@ class TableController():
         return self.tableRepository.delete(id)
 
 
-    def findReportByTable(self, id_table):
+    def updateTableVotes(self, id_table, new_votes):
         print("Rerpor por mesa")
-        results = self.resultRepository.findByTable(id_table)
-        total_votes = 0
-        for votes in results:
-            total_votes += votes["votes"]
         table = Table(self.tableRepository.findById(id_table))
-        table.totalVotes = total_votes
+        table.totalVotes = table.totalVotes + new_votes
         return self.tableRepository.save(table)
 
 
@@ -109,7 +105,7 @@ class TableController():
         for party in parties_array:
             first = True
             for result in results_array:
-                if result["party"] == party:
+                if result["candidate"]["party"] == party:
                     if(first):
                         name_per_party.insert(i, party["name"])
                         votes_per_party.insert(i, result["votes"])
