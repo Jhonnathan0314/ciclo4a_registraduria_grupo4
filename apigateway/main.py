@@ -43,7 +43,7 @@ def format_url():
 
 @app.before_request
 def before_request_callback():
-    excluded_routes = ["/login"]
+    excluded_routes = ["/login","/user"]
     # Token
     if request.path not in excluded_routes:
         if not verify_jwt_in_request():
