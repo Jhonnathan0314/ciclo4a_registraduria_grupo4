@@ -47,6 +47,8 @@ public class UserController {
 	public User create(@RequestBody User info) {
 		String password = info.getPassword();
 		info.setPassword(convertSHA256(password));
+		Role role = this.roleRepository.findById("62d9cbf7e7be7361b039f238").orElse(null);
+		info.setRole(role);   
 		return this.userRepository.save(info);
 	}
 	

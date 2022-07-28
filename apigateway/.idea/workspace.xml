@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="20340817-5e83-4605-9d8a-dbb3a2c50682" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../microservices/results/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../microservices/results/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../microservices/results/controllers/resultController.py" beforeDir="false" afterPath="$PROJECT_DIR$/../microservices/results/controllers/resultController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../microservices/results/controllers/tableController.py" beforeDir="false" afterPath="$PROJECT_DIR$/../microservices/results/controllers/tableController.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../microservices/results/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../microservices/results/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../microservices/results/repositories/resultRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../microservices/results/repositories/resultRepository.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

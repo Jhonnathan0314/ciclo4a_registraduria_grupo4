@@ -47,6 +47,7 @@ class ResultController():
         old_result.table = table
         old_result.candidate = candidate
         old_result.votes = info["votes"]
+        self.tableController.updateTableVotes(id_table, info["votes"])
         return self.resultRepository.save(old_result)
 
 
