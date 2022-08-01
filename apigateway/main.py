@@ -44,7 +44,6 @@ def format_url():
 @app.before_request
 def before_request_callback():
     request.path = format_url()
-    print(request.path)
     excluded_routes = ["/login", "/user", "/user/?/role/?"]
     # Token
     if request.path not in excluded_routes:
